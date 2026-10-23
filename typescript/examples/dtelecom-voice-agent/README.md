@@ -75,7 +75,7 @@ The example creates a minimal session to keep costs low:
 
 - **Duration**: 1 minute (`durationMinutes: 1`)
 - **TTS characters**: 500 (`ttsMaxCharacters: 500`)
-- **Cost**: ~11,000 microcredits (~$0.01)
+- **Cost**: 9,000 microcredits ($0.009), assuming both audio participants use the full minute and all 500 TTS characters; excludes LLM
 
 To run longer sessions, increase these values in `voice-agent.ts`:
 
@@ -87,7 +87,7 @@ const session = await invoke("DtelecomActionProvider_create_agent_session", {
 });
 ```
 
-A 10-minute session with 10K TTS characters costs ~150,000 microcredits (~$0.15).
+A 10-minute session with 10K TTS characters costs 120,000 microcredits ($0.12) with two audio participants, excluding LLM.
 
 ## How It Works
 
@@ -113,18 +113,8 @@ Browser (client.html)          Server (voice-agent.ts)
 - **TTS**: Text-to-speech synthesizes the response as audio
 - **x402**: Credits purchased automatically using USDC from the CDP wallet
 
-## Supported Languages
+## Session languages
 
-Pass a language code to `createAgentSession`:
+Use ISO language codes such as `en`, `ru`, `es`, `fr`, `hi`, `it`, `ja`, `pt` and `zh` in session creation. `en-GB` is an English locale. Kokoro pipeline letters (`a`, `b`, etc.) belong to explicit TTS WebSocket voice configuration; they are not general STT/agent language codes. Supertonic supports 31 languages; Kokoro additionally provides Mandarin. See [current speech capabilities](https://x402.dtelecom.org/docs.md#streaming-speech-controls).
 
-| Code | Language |
-|------|----------|
-| `a` | English (US) |
-| `b` | English (UK) |
-| `e` | Spanish |
-| `f` | French |
-| `h` | Hindi |
-| `i` | Italian |
-| `j` | Japanese |
-| `p` | Portuguese (BR) |
-| `z` | Chinese (Mandarin) |
+Partials and Smart Turn are opt-in WebSocket/provider controls; SSML and watermark are TTS controls. Creating an AgentKit session alone does not enable them.

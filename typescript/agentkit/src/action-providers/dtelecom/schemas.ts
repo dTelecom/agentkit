@@ -56,7 +56,7 @@ export const CreateAgentSessionSchema = z
       .string()
       .optional()
       .describe(
-        "Language code: a=English US, b=English UK, e=Spanish, f=French, h=Hindi, i=Italian, j=Japanese, p=Portuguese BR, z=Chinese Mandarin",
+        "ISO session language code, e.g. en, ru, es, fr, hi, it, ja, pt, zh; not a Kokoro pipeline letter",
       ),
     ttsMaxCharacters: z
       .number()
@@ -128,7 +128,7 @@ export const CreateSTTSessionSchema = z
       .string()
       .optional()
       .describe(
-        "Language code: a=English US, b=English UK, e=Spanish, f=French, h=Hindi, i=Italian, j=Japanese, p=Portuguese BR, z=Chinese Mandarin",
+        "ISO session language code, e.g. en, ru, es, fr, hi, it, ja, pt, zh; not a Kokoro pipeline letter",
       ),
   })
   .strip()
@@ -159,7 +159,7 @@ export const CreateTTSSessionSchema = z
       .string()
       .optional()
       .describe(
-        "Language code: a=English US, b=English UK, e=Spanish, f=French, h=Hindi, i=Italian, j=Japanese, p=Portuguese BR, z=Chinese Mandarin",
+        "ISO session language code, e.g. en, ru, es, fr, hi, it, ja, pt, zh; not a Kokoro pipeline letter",
       ),
   })
   .strip()

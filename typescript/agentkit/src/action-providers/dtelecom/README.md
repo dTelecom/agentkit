@@ -4,7 +4,7 @@ This provider integrates [dTelecom](https://dtelecom.org) decentralized voice in
 
 ## Overview
 
-dTelecom provides decentralized communication infrastructure paid via the [x402 payment protocol](https://www.x402.org/) using USDC on Base. This provider wraps the `@dtelecom/x402-client` SDK to expose all gateway operations as AgentKit actions.
+dTelecom provides decentralized communication infrastructure paid via the [x402 payment protocol](https://www.x402.org/) using USDC on Base. This provider wraps the `@dtelecom/x402-client` SDK to expose the 12 credit/account/session actions listed below. It does not expose translation, file transcription, WAV, vision or moderation actions; use the current x402-client directly for those APIs.
 
 ## Setup
 
@@ -37,19 +37,11 @@ const agentkit = await AgentKit.from({
 | `create_tts_session` | Create standalone TTS session |
 | `extend_tts_session` | Extend TTS session character limit |
 
-## Supported Languages
+## Session languages
 
-| Code | Language |
-|------|----------|
-| `a` | English (US) |
-| `b` | English (UK) |
-| `e` | Spanish |
-| `f` | French |
-| `h` | Hindi |
-| `i` | Italian |
-| `j` | Japanese |
-| `p` | Portuguese (BR) |
-| `z` | Chinese (Mandarin) |
+Use ISO language codes such as `en`, `ru`, `es`, `fr`, `hi`, `it`, `ja`, `pt` and `zh` in session creation. `en-GB` is an English locale. Kokoro pipeline letters (`a`, `b`, etc.) belong to explicit TTS WebSocket voice configuration; they are not general STT/agent language codes. Supertonic supports 31 languages; Kokoro additionally provides Mandarin. See [current speech capabilities](https://x402.dtelecom.org/docs.md#streaming-speech-controls).
+
+Partials and Smart Turn are opt-in WebSocket/provider controls; SSML and watermark are TTS controls. Creating an AgentKit session alone does not enable them.
 
 ## Network Support
 
@@ -61,4 +53,4 @@ This provider supports EVM networks. Payments are processed on Base mainnet usin
 
 ## Example
 
-See the [dtelecom-voice-agent example](../../../examples/dtelecom-voice-agent/) for a complete voice agent using this provider with `@dtelecom/agents-js`.
+See the [dtelecom-voice-agent example](../../../../examples/dtelecom-voice-agent/) for a complete voice agent using this provider with `@dtelecom/agents-js`.
